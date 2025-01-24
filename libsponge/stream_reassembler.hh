@@ -4,7 +4,15 @@
 #include "byte_stream.hh"
 
 #include <cstdint>
+#include <set>
 #include <string>
+#include <vector>
+
+struct outOrderNode {
+    size_t _index = 0, _len = 0;
+    std::string _data = "";
+    bool operator< (const outOrderNode b) const { return _index < b._index; }
+};
 
 //! \brief A class that assembles a series of excerpts from a byte stream (possibly out of order,
 //! possibly overlapping) into an in-order byte stream.
@@ -14,6 +22,11 @@ class StreamReassembler {
 
     ByteStream _output;  //!< The reassembled in-order byte stream
     size_t _capacity;    //!< The maximum number of bytes
+    // 标识当前已正序的数据
+    size_t _buffer_index = 0;
+    std::set<outOrderNode> _outOrderData_set = {};
+    size_t _unassembled_bytes = 0;
+    bool _eof_flags = false;
 
   public:
     //! \brief Construct a `StreamReassembler` that will store up to `capacity` bytes.
