@@ -1,5 +1,4 @@
 #include "wrapping_integers.hh"
-#include <iostream>
 
 // Dummy implementation of a 32-bit wrapping integer
 
