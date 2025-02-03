@@ -11,7 +11,7 @@
 struct outOrderNode {
     size_t _index = 0, _len = 0;
     std::string _data = "";
-    bool operator< (const outOrderNode b) const { return _index < b._index; }
+    bool operator<(const outOrderNode b) const { return _index < b._index; }
 };
 
 //! \brief A class that assembles a series of excerpts from a byte stream (possibly out of order,

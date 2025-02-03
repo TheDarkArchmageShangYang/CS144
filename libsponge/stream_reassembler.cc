@@ -1,4 +1,5 @@
 #include "stream_reassembler.hh"
+
 #include <iostream>
 
 // Dummy implementation of a stream reassembler.
@@ -41,7 +42,7 @@ void StreamReassembler::push_substring(const string &data, const size_t index, c
     // 在set中寻找什么节点能和node合并,set中按照_index从小到大存储
     auto it = _outOrderData_set.begin();
     while (it != _outOrderData_set.end()) {
-    // for (auto &it : _outOrderData_set) {
+        // for (auto &it : _outOrderData_set) {
         // 后面的_index只会更大,不需要再遍历
         if (node._index + node._len < it->_index) {
             break;
@@ -51,7 +52,7 @@ void StreamReassembler::push_substring(const string &data, const size_t index, c
             it++;
             continue;
         }
-        
+
         // 需要合并node和it
         outOrderNode node_smaller, node_bigger;
         // 使node_smaller成为node和it中_index更小的节点,bigger成为更大的节点
@@ -64,10 +65,10 @@ void StreamReassembler::push_substring(const string &data, const size_t index, c
         }
         // 合并节点
         node._index = node_smaller._index;
-        size_t node_bigger_data_start = min(node_bigger._len, node_smaller._index + node_smaller._len - node_bigger._index);
+        size_t node_bigger_data_start =
+            min(node_bigger._len, node_smaller._index + node_smaller._len - node_bigger._index);
         size_t node_bigger_data_len = node_bigger._len - node_bigger_data_start;
-        node._data = node_smaller._data +
-                     node_bigger._data.substr(node_bigger_data_start, node_bigger_data_len);
+        node._data = node_smaller._data + node_bigger._data.substr(node_bigger_data_start, node_bigger_data_len);
         node._len = node._data.length();
         //在set中移除it
         _unassembled_bytes -= it->_len;

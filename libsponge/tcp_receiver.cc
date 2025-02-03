@@ -6,7 +6,7 @@
 // automated checks run by `make check_lab2`.
 
 template <typename... Targs>
-void DUMMY_CODE(Targs &&... /* unused */) {}
+void DUMMY_CODE(Targs &&.../* unused */) {}
 
 using namespace std;
 
@@ -36,7 +36,7 @@ optional<WrappingInt32> TCPReceiver::ackno() const {
     if (_reassembler.stream_out().input_ended()) {
         absolute_seq++;
     }
-    return _isn + absolute_seq; 
+    return _isn + absolute_seq;
 }
 
 size_t TCPReceiver::window_size() const { return _capacity - _reassembler.stream_out().buffer_size(); }

@@ -42,7 +42,6 @@ class TCPSender {
     bool _timer_running = false;
     size_t _time = 0;
     unsigned int _rto = 0;
-    
 
   public:
     //! Initialize a TCPSender
